@@ -12,16 +12,9 @@ do (root = window, d = window.document) ->
             unless @el then throw new Error "Element `#{el}` not found"
         
         loadAd: (cb) ->
-            @_iframe.addEventListener "load", fn = (e) =>
+            @on "load", =>
                 @_placeAd()
-                cb(null, e)
-                @_iframe.removeEventListener "load", fn, false
-            , false
-
-            @_iframe.addEventListener "error", errFn = (e) ->
-                cb(e, null)
-                @removeEventListener "error", errFn, false
-            , false
+                cb()
 
             @_iframe.src = @url
 
