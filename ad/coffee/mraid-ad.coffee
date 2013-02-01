@@ -9,10 +9,8 @@ do (root = window, parent = window.parent) ->
         constructor: () ->
 
         _getParam: (paramName) ->
-            search = window.location.search
-            queryArr = search.split("?")
-            query = queryArr[queryArr.length-1]
-            paramsArr = query.split("&")
+            params = window.location.search.slice(1).slice(0, -1).split("&")
+
             for param in paramsArr
                 kvArr = param.split("=")
                 if kvArr[0] == paramName
