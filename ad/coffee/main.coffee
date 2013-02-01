@@ -1,5 +1,5 @@
 $ ->
     ad = new window.Ad
-    ad.post { ohad: "stinks", dan: "is doing ads" }
     ad.on (data) ->
-        console.log data
+        document.body.innerHTML = data
+    ad.post { ohad: "stinks", dan: "is doing ads" }

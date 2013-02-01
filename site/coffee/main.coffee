@@ -39,4 +39,3 @@ $ ->
     ad = new window.Ad("http://localhost:8001", "#ad")
     ad.loadAd (data) ->
         console.log data
-    , "here is my response"
