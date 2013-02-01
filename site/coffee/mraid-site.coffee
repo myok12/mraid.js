@@ -5,6 +5,17 @@
 do (root = window, d = window.document) ->
     "use strict"
 
+    class AdService
+        constructor: ->
+        loadAdIntoEl: (el, {height, width, geo}, cb) ->
+            geo = false if geo != true
+            if geo
+                adUrl = "http://localhost:8001?geo=true"
+            else
+                adUrl = "http://localhost:8001?geo=false"
+            ad = new Ad(adUrl, el, {geo})
+            ad.loadAd ->
+                cb()
     class Ad
         constructor: (@url, el) ->
             @_createIframe()
@@ -36,4 +47,4 @@ do (root = window, d = window.document) ->
         post: (msg) ->
             root.postMessage(msg, @url)
 
-    root.Ad = Ad
+    root.AdService = new AdService()

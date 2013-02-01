@@ -36,6 +36,5 @@ $ ->
         navigator.geolocation.getCurrentPosition geoSuccess, geoFailed
 
 
-    ad = new window.Ad("http://localhost:8001", "#ad")
-    ad.loadAd ->
+    window.AdService.loadAdIntoEl "#ad", {geo: true}, ->
         console.log "ad is loaded"
