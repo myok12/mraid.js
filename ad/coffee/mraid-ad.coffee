@@ -9,10 +9,10 @@ do (root = window, parent = window.parent) ->
         constructor: () ->
 
         # Listen to messages from the ad
-        on: (event, cb, resp) ->
+        on: (cb, resp) ->
             root.addEventListener "message", (e) =>
                 if e.origin != @url then return
-                cb(e)
+                cb(e.data)
                 if resp then e.source.postMessage(resp, e.origin)
             , false
 
