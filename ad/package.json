@@ -1,0 +1,18 @@
+{
+  "name": "mraid-site",
+  "description": "a ad using mraid.js",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "npm run-script compile ; python -m SimpleHTTPServer 8001",
+    "compile": "INPUT=coffee ; OUTPUT=js ; rm -rf $OUTPUT; cp -r $INPUT $OUTPUT ; find $OUTPUT -name '*.coffee' -exec rm {} \\; ; node_modules/coffee-script/bin/coffee -c -o $OUTPUT $INPUT"
+  },
+  "dependencies": {
+    "coffee-script": "*"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": "*"
+  }
+}
