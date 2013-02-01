@@ -35,7 +35,6 @@ do (root = window, d = window.document) ->
 
         # Post a message to the ad
         post: (msg) ->
-            window.FF = @_iframe
             @_iframe.contentWindow.postMessage(msg, "http://localhost:8001")
 
     root.Ad = Ad
