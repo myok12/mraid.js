@@ -12,11 +12,11 @@ do (root = window, d = window.document) ->
             unless @el then throw new Error "Element `#{el}` not found"
         
         loadAd: (cb) ->
-            @on "load", =>
-                @_placeAd()
-                cb()
+            @on (args...) =>
+                cb(args...)
 
             @_iframe.src = @url
+            @_placeAd()
 
         _createIframe: ->
             @_iframe = d.createElement("iframe")
@@ -25,11 +25,11 @@ do (root = window, d = window.document) ->
             @el.appendChild(@_iframe)
 
         # Listen to messages from the ad
-        on: (event, cb, resp) ->
-            root.addEventListener msg, (e) =>
+        on: (cb, resp) ->
+            root.addEventListener "message", (args...) =>
                 if e.origin != @url then return
-                cb(e)
-                e.source.postMessage(resp, e.origin)
+                cb(args...)
+                #e.source.postMessage(resp, e.origin)
             , false
 
         # Post a message to the ad
