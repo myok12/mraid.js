@@ -1,4 +1,4 @@
-$(
+$ ->
     output = $("#coords")
 
     if !Modernizr.geolocation
@@ -35,5 +35,7 @@ $(
             output.html "You are in (#{lat}, #{lng})"
         navigator.geolocation.getCurrentPosition geoSuccess, geoFailed
 
-)
 
+    ad = new window.Ad("http://localhost:8080", "#ad")
+    loadAd ->
+        console.log "ad is loaded"
