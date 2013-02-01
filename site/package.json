@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "compile-lib": "INPUT=lib-coffee ; OUTPUT=lib ; rm -rf $OUTPUT; cp -r $INPUT $OUTPUT ; find $OUTPUT -name '*.coffee' -exec rm {} \\; ; node_modules/coffee-script/bin/coffee -c -o $OUTPUT $INPUT",
-    "start": "npm run-script compile-lib ; node lib/app --level info",
+    "start": "http://localhost:8000 && python -m SimpleHTTPServer",
   },
   "dependencies": {
     "coffee-script": "*",
