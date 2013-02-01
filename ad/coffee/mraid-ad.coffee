@@ -19,17 +19,16 @@ do (root = window, parent = window.parent) ->
                     return kvArr[1]
 
         hasGeo: () ->
-            alert(@_getParam("geo") == "true")
+            @_getParam("geo") == "true"
 
-        # Listen to messages from the ad
-        on: (event, cb, resp) ->
+        # Listen to messages from parent
+        on: (cb, resp) ->
             root.addEventListener "message", (e) =>
-                if e.origin != @url then return
-                cb(e)
+                cb(e.data)
                 if resp then e.source.postMessage(resp, e.origin)
             , false
 
-        # Post a message to the ad
+        # Post a message to parent
         post: (msg) ->
             parent.postMessage(msg, "*")
 
