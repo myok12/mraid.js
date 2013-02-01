@@ -19,17 +19,25 @@ do (root = window, parent = window.parent) ->
                     return kvArr[1]
 
         hasGeo: () ->
-            @_getParam("geo") == "true"
+            #@_getParam("geo") == "true"
+            return true
+
+        getGeoLocation: (cb) ->
+            @_on (resp) ->
+                console.log resp
+                if resp.type == "geoResponse"
+                    cb(resp.data)
+            @_post({type: "geoRequest"})
 
         # Listen to messages from parent
-        on: (cb, resp) ->
+        _on: (cb, resp) ->
             root.addEventListener "message", (e) =>
                 cb(e.data)
                 if resp then e.source.postMessage(resp, e.origin)
             , false
 
         # Post a message to parent
-        post: (msg) ->
+        _post: (msg) ->
             parent.postMessage(msg, "*")
 
     root.adContainer = new AdContainer()

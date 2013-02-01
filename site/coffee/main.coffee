@@ -36,5 +36,5 @@ $ ->
         navigator.geolocation.getCurrentPosition geoSuccess, geoFailed
 
 
-    window.AdService.loadAdIntoEl "#ad", {geo: true}, ->
+    window.adService.loadAdIntoEl "#ad", {geo: true}, ->
         console.log "ad is loaded"
