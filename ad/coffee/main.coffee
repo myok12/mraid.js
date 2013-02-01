@@ -1,3 +1,4 @@
 $ ->
-    ad = new window.Ad
-    ad.post { ohad: "stinks", dan: "ads" }
+    adContainer.post { ohad: "stinks", dan: "ads" }
+
+    adContainer.hasGeo()
