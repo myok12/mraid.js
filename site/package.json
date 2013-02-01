@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "compile": "INPUT=coffee ; OUTPUT=js ; rm -rf $OUTPUT; cp -r $INPUT $OUTPUT ; find $OUTPUT -name '*.coffee' -exec rm {} \\; ; node_modules/coffee-script/bin/coffee -c -o $OUTPUT $INPUT",
-    "start": "npm run-script compile-lib ; node lib/app --level info"
+    "start": "python -m SimpleHTTPServer",
+    "compile": "INPUT=coffee ; OUTPUT=js ; rm -rf $OUTPUT; cp -r $INPUT $OUTPUT ; find $OUTPUT -name '*.coffee' -exec rm {} \\; ; node_modules/coffee-script/bin/coffee -c -o $OUTPUT $INPUT"
   },
   "dependencies": {
     "coffee-script": "*"
