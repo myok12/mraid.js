@@ -12,23 +12,27 @@ do (root = window, d = window.document) ->
             unless @el then throw new Error "Element `#{el}` not found"
         
         loadAd: (cb) ->
-            @_iframe.addEventListener "load", fn = (e) =>
-                @_placeAd()
-                cb(null, e)
-                @_iframe.removeEventListener "load", fn, false
-            , false
+            #alert "loadingAd"
+            #@_iframe.addEventListener "load", fn = (e) =>
+            @_placeAd()
+            #cb(null, e)
+            #    @_iframe.removeEventListener "load", fn, false
+            #, false
 
-            @_iframe.addEventListener "error", errFn = (e) ->
-                cb(e, null)
-                @removeEventListener "error", errFn, false
-            , false
+            #@_iframe.addEventListener "error", errFn = (e) ->
+            #    cb(e, null)
+            #    @removeEventListener "error", errFn, false
+            #, false
 
+            console.log @url
             @_iframe.src = @url
+            console.log @_iframe
 
         _createIframe: ->
             @_iframe = d.createElement("iframe")
 
         _placeAd: ->
+            alert "placingAd"
             @el.appendChild(@_iframe)
 
         # Listen to messages from the ad
