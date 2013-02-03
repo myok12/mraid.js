@@ -4,13 +4,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npm run-script compile ; python -m SimpleHTTPServer 8001",
-    "compile": "INPUT=coffee ; OUTPUT=js ; rm -rf $OUTPUT; cp -r $INPUT $OUTPUT ; find $OUTPUT -name '*.coffee' -exec rm {} \\; ; node_modules/coffee-script/bin/coffee -c -o $OUTPUT $INPUT"
+    "start": "python -m SimpleHTTPServer 8001"
   },
   "dependencies": {
-    "coffee-script": "*"
   },
   "devDependencies": {
+    "coffee-script": "*",
+    "grunt-contrib-coffee": "~0.3.2"
   },
   "engines": {
     "node": "*"

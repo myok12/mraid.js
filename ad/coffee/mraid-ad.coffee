@@ -11,7 +11,7 @@ do (root = window, parent = window.parent) ->
         _getParam: (paramName) ->
             params = window.location.search.slice(1).slice(0, -1).split("&")
 
-            for param in paramsArr
+            for param in params
                 kvArr = param.split("=")
                 if kvArr[0] == paramName
                     return kvArr[1]
@@ -22,7 +22,6 @@ do (root = window, parent = window.parent) ->
 
         getGeoLocation: (cb) ->
             @_on (resp) ->
-                console.log resp
                 if resp.type == "geoResponse"
                     cb(resp.data)
             @_post({type: "geoRequest"})
