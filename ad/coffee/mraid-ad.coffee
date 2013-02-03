@@ -17,16 +17,19 @@ do (root = window, parent = window.parent) ->
                     return kvArr[1]
 
         hasGeo: () ->
-            #@_getParam("geo") == "true"
-            return true
+            @_getParam("geo")
 
         getGeoLocation: (cb) ->
             @_on (resp) ->
                 if resp.type == "geoResponse"
                     cb(resp.data)
-            @_post({type: "geoRequest"})
+            @_post type: "geoRequest"
 
-        # Listen to messages from parent
+        ###
+        # @method _on
+        # @param {Function} cb
+        # @param {Mixed} resp - Allows immediate response to the origin 
+        ###
         _on: (cb, resp) ->
             root.addEventListener "message", (e) =>
                 cb(e.data)
