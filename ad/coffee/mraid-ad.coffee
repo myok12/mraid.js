@@ -22,7 +22,7 @@ do (root = window, parent = window.parent) ->
         getGeoLocation: (cb) ->
             @_on (resp) ->
                 if resp.type == "geoResponse"
-                    cb(resp.data)
+                    cb(resp)
             @_post type: "geoRequest"
 
         ###

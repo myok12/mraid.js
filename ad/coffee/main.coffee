@@ -1,8 +1,10 @@
 $ ->
     output = $("#coords")
     adContainer.getGeoLocation (data) ->
-        pos = data.pos
-        if data.err
-            output.html("Cannot use geo")
+        if data
+            if data.err
+                output.html("Cannot use geo")
+            else
+                output.html("User is at: (#{data.longitude}, #{data.latitude})")
         else
-            output.html("User is at: (#{pos.longitude}, #{pos.latitude})")
+            output.html("No data passed")

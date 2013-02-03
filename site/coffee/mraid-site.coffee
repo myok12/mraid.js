@@ -1,5 +1,4 @@
-###
-# @authors Ohad Kravchick & Trevor Landau
+### # @authors Ohad Kravchick & Trevor Landau
 ###
 
 do (root = window, d = window.document) ->
@@ -50,7 +49,6 @@ do (root = window, d = window.document) ->
 
     class Ad
         constructor: (@domain, @url, el, @services) ->
-            console.log arguments
             @_createIframe()
             @el = d.querySelector(el)
             unless @el then throw new Error "Element `#{el}` not found"
@@ -67,25 +65,22 @@ do (root = window, d = window.document) ->
         setUpGeo: ->
             geoLocation = window.navigator.geolocation
             if geoLocation
-                @_on (data) ->
+                @_on (data) =>
                     if data.type == "geoRequest"
-                        if !@services.geo
+                        unless @services.geo
                             @_post
                                 type: "geoResponse",
-                                data:
-                                    err: "Location preferance not setup"
+                                err: "Location preferance not setup"
                         else
-                            window.navigator.geolocation.getCurrentPosition (pos) =>
+                            window.navigator.geolocation.getCurrentPosition ({coords}) =>
                                 @_post
                                     type: "geoResponse"
-                                    data:
-                                        longitude: pos.coords.longitude
-                                        latitude: pos.coords.latitude
+                                    longitude: coords.longitude
+                                    latitude: coords.latitude
                             , (err) =>
                                 @_post
                                     type: "geoResponse"
-                                    data:
-                                        err: "Unable to get location"
+                                    err: "Unable to get location"
 
         _createIframe: ->
             @_iframe = d.createElement("iframe")
@@ -100,14 +95,15 @@ do (root = window, d = window.document) ->
         ###
         _on: (cb, resp) ->
             root.addEventListener "message", (e) =>
-                if e.origin != @adDomain then return
+                if e.origin != @domain then return
                 cb(e.data)
-                if resp then e.source.postMessage(resp, e.origin)
+                if resp
+                    resp = if typeof resp == "function" then resp()
+                    e.source.postMessage(resp, e.origin)
             , false
 
         # Post a message to the ad
         _post: (msg) ->
-            console.log @domain
-            @_iframe.contentWindow.postMessage(msg, @domain)
+            @_iframe.contentWindow.postMessage(msg, @url)
 
     root.adService = new AdService()
